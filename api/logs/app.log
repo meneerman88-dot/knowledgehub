@@ -1,0 +1,25 @@
+2026-05-21 09:44:03,479 - INFO - Knowledge Hub API gestart
+2026-05-21 09:44:04,478 - INFO - Knowledge Hub API gestart
+2026-05-21 09:46:43,872 - INFO - Request: GET /api/v1/metrics from 127.0.0.1
+2026-05-21 09:46:55,770 - INFO - Request: GET /api/v1/metrics from 127.0.0.1
+2026-05-21 09:50:12,832 - INFO - Request: GET /api/v1/metrics from 127.0.0.1
+2026-05-21 09:50:21,112 - INFO - Request: GET /api/v1/metrics from 127.0.0.1
+2026-05-21 09:50:25,413 - INFO - Request: GET / from 127.0.0.1
+2026-05-21 09:50:25,534 - INFO - Request: GET /favicon.ico from 127.0.0.1
+2026-05-21 09:50:25,534 - WARNING - 404 fout: /favicon.ico
+2026-05-21 09:51:09,456 - INFO - Request: GET /api/v1/metrics from 127.0.0.1
+2026-05-21 09:52:35,439 - INFO - Request: GET /api/v1/metrics from 127.0.0.1
+2026-05-21 09:52:59,477 - INFO - Request: POST /api/v1/metrics from 127.0.0.1
+2026-05-21 09:52:59,488 - INFO - Metric opgeslagen voor host: dc01.knowledgehub.local
+2026-05-21 09:53:01,545 - INFO - Request: POST /api/v1/metrics from 127.0.0.1
+2026-05-21 09:53:01,556 - INFO - Metric opgeslagen voor host: fileserver01.knowledgehub.local
+2026-05-21 09:53:03,596 - INFO - Request: POST /api/v1/metrics from 127.0.0.1
+2026-05-21 09:53:03,608 - INFO - Metric opgeslagen voor host: webserver01.knowledgehub.local
+2026-05-21 09:53:05,346 - INFO - Request: GET /api/v1/metrics from 127.0.0.1
+2026-05-21 09:53:05,660 - INFO - Request: POST /api/v1/metrics from 127.0.0.1
+2026-05-21 09:53:05,679 - INFO - Metric opgeslagen voor host: monitoring01.knowledgehub.local
+2026-05-21 09:53:07,724 - INFO - Request: POST /api/v1/metrics from 127.0.0.1
+2026-05-21 09:53:07,734 - INFO - Metric opgeslagen voor host: dockerhost01.knowledgehub.local
+2026-05-21 10:50:48,832 - INFO - Request: GET / from 127.0.0.1
+2026-05-21 10:52:57,577 - INFO - Request: GET /api/v1/metrics from 127.0.0.1
+2026-05-21 10:53:57,507 - INFO - Request: GET /api/v1/metrics from 127.0.0.1

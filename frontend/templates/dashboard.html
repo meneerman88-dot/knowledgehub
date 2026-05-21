@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Knowledge Hub Monitoring Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-icon">🛡️</div>
+            <div>
+                <h1>Knowledge Hub</h1>
+                <p>Monitoring System</p>
+            </div>
+        </div>
+
+        <nav class="nav">
+            <a class="active" href="#">📊 Dashboard</a>
+            <a href="#">🖥️ Systems</a>
+            <a href="#">🐳 Containers</a>
+            <a href="#">🌐 Network</a>
+            <a href="#">🔔 Alerts</a>
+            <a href="#">📄 Logs</a>
+            <a href="#">⚙️ Settings</a>
+        </nav>
+
+        <div class="security-card">
+            <span class="small-label">SECURITY</span>
+            <div class="security-status">
+                <span class="pulse"></span>
+                <strong>Zero Trust Ready</strong>
+            </div>
+            <p>Prepared for Entra ID authentication in Task 2</p>
+        </div>
+    </aside>
+
+    <main class="content">
+        <header class="topbar">
+            <div>
+                <h2>Dashboard</h2>
+                <p>Real-time infrastructure monitoring · {{ current_time }}</p>
+            </div>
+
+            <div class="topbar-actions">
+                <div class="api-status {{ api_status }}">
+                    <span></span>
+                    API {{ api_status }}
+                </div>
+
+                <a class="logout-button" href="{{ url_for('logout') }}">Logout</a>
+            </div>
+        </header>
+
+        <section class="overview-grid">
+            <article class="overview-card">
+                <div class="card-header">
+                    <span>✅</span>
+                    <p>System Health</p>
+                </div>
+                <h3>{{ dashboard.system_health }}%</h3>
+                <small>{{ dashboard.healthy_count }} healthy measurements</small>
+            </article>
+
+            <article class="overview-card">
+                <div class="card-header">
+                    <span>🖥️</span>
+                    <p>Total Systems</p>
+                </div>
+                <h3>{{ dashboard.total_systems }}</h3>
+                <small>Unique monitored hosts</small>
+            </article>
+
+            <article class="overview-card">
+                <div class="card-header">
+                    <span>⚙️</span>
+                    <p>Average CPU</p>
+                </div>
+                <h3>{{ dashboard.avg_cpu }}%</h3>
+                <div class="bar"><span style="width: {{ dashboard.avg_cpu }}%"></span></div>
+            </article>
+
+            <article class="overview-card">
+                <div class="card-header">
+                    <span>💾</span>
+                    <p>Average Memory</p>
+                </div>
+                <h3>{{ dashboard.avg_memory }}%</h3>
+                <div class="bar"><span style="width: {{ dashboard.avg_memory }}%"></span></div>
+            </article>
+        </section>
+
+        <section class="main-grid">
+            <article class="panel wide">
+                <div class="panel-title">
+                    <h3>Live Metrics</h3>
+                    <p>Data loaded from the existing CS2 Flask API</p>
+                </div>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Hostname</th>
+                                <th>CPU</th>
+                                <th>Memory</th>
+                                <th>Disk</th>
+                                <th>Status</th>
+                                <th>Timestamp</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% for metric in metrics %}
+                            <tr>
+                                <td>{{ metric.hostname }}</td>
+                                <td>
+                                    {{ metric.cpu_usage }}%
+                                    <div class="mini-bar"><span style="width: {{ metric.cpu_usage }}%"></span></div>
+                                </td>
+                                <td>
+                                    {{ metric.memory_usage }}%
+                                    <div class="mini-bar"><span style="width: {{ metric.memory_usage }}%"></span></div>
+                                </td>
+                                <td>
+                                    {{ metric.disk_usage }}%
+                                    <div class="mini-bar"><span style="width: {{ metric.disk_usage }}%"></span></div>
+                                </td>
+                                <td>
+                                    <span class="badge {{ metric.status | lower }}">
+                                        {{ metric.status }}
+                                    </span>
+                                </td>
+                                <td>{{ metric.timestamp }}</td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="6" class="empty-state">
+                                    No monitoring data available yet. Start the API and run seed_metrics.py.
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </article>
+
+            <aside class="panel">
+                <div class="panel-title">
+                    <h3>Recent Alerts</h3>
+                    <p>Threshold: CPU, memory or disk above 80%</p>
+                </div>
+
+                {% for alert in dashboard.alerts %}
+                <div class="alert-card">
+                    <strong>{{ alert.hostname }}</strong>
+                    <p>CPU {{ alert.cpu_usage }}% · Memory {{ alert.memory_usage }}% · Disk {{ alert.disk_usage }}%</p>
+                </div>
+                {% else %}
+                <p class="empty-text">No active alerts.</p>
+                {% endfor %}
+            </aside>
+        </section>
+
+        <section class="bottom-grid">
+            <article class="panel">
+                <h3>Cloud Connection</h3>
+                <div class="connection-status">
+                    <span class="pulse"></span>
+                    <div>
+                        <strong>Azure integration prepared</strong>
+                        <p>Ready for CI/CD and Azure Container Apps in later tasks.</p>
+                    </div>
+                </div>
+            </article>
+
+            <article class="panel">
+                <h3>Task 1 Evidence</h3>
+                <ul class="evidence-list">
+                    <li>Secure web interface design based on Figma mockup</li>
+                    <li>Flask frontend with routes and templates</li>
+                    <li>Frontend reads monitoring data from CS2 API</li>
+                    <li>Structure prepared for Entra ID authentication</li>
+                </ul>
+            </article>
+        </section>
+    </main>
+</body>
+</html>

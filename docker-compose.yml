@@ -1,0 +1,49 @@
+services:
+
+  api:
+    build:
+      context: ./api
+
+    container_name: knowledgehub-api
+
+    ports:
+      - "8000:8000"
+
+    env_file:
+      - ./api/.env
+
+    volumes:
+      - api_logs:/app/logs
+      - api_data:/app/instance
+
+    networks:
+      - knowledgehub-network
+
+
+  frontend:
+    build:
+      context: ./frontend
+
+    container_name: knowledgehub-frontend
+
+    ports:
+      - "5000:5000"
+
+    env_file:
+      - ./frontend/.env
+
+    depends_on:
+      - api
+
+    networks:
+      - knowledgehub-network
+
+
+networks:
+  knowledgehub-network:
+    driver: bridge
+
+
+volumes:
+  api_logs:
+  api_data:

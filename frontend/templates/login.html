@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Knowledge Hub Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body class="login-body">
+    <div class="login-background"></div>
+
+    <main class="login-card">
+        <div class="login-logo">🛡️</div>
+        <h1>Knowledge Hub</h1>
+        <p class="login-subtitle">Monitoring System</p>
+
+        <div class="auth-info">
+            <strong>Microsoft Entra ID Authentication</strong>
+            <span>Sign in with your organizational account</span>
+        </div>
+
+        <a class="signin-button" href="{{ url_for('signin') }}">
+            Sign in with Entra ID
+        </a>
+
+        <p class="login-note">
+            Task 1 demo login. In Task 2 this will be replaced with real Microsoft Entra ID OAuth/OIDC authentication.
+        </p>
+    </main>
+</body>
+</html>
