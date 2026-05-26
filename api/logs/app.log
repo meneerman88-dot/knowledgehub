@@ -23,3 +23,7 @@
 2026-05-21 10:50:48,832 - INFO - Request: GET / from 127.0.0.1
 2026-05-21 10:52:57,577 - INFO - Request: GET /api/v1/metrics from 127.0.0.1
 2026-05-21 10:53:57,507 - INFO - Request: GET /api/v1/metrics from 127.0.0.1
+2026-05-26 09:33:54,910 - INFO - Knowledge Hub API gestart
+2026-05-26 09:33:55,569 - INFO - Knowledge Hub API gestart
+2026-05-26 09:54:58,881 - INFO - Knowledge Hub API gestart
+2026-05-26 09:54:59,704 - INFO - Knowledge Hub API gestart

@@ -11,8 +11,6 @@ load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = os.getenv("SESSION_SECRET", "dev-secret-change-later")
-
-# Nodig voor Azure Container Apps HTTPS reverse proxy
 app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
 
 API_URL = os.getenv("API_URL", "http://localhost:8000/api/v1/metrics")
@@ -134,9 +132,15 @@ def index():
     metrics, api_status = fetch_metrics()
     dashboard = calculate_dashboard_data(metrics)
 
+    container_metrics = [
+        metric for metric in metrics
+        if metric.get("hostname", "").startswith("container-")
+    ]
+
     return render_template(
         "dashboard.html",
         metrics=metrics,
+        container_metrics=container_metrics,
         api_status=api_status,
         dashboard=dashboard,
         current_time=datetime.now().strftime("%d-%m-%Y %H:%M"),

@@ -19,7 +19,7 @@
         <nav class="nav">
             <a class="active" href="#">📊 Dashboard</a>
             <a href="#">🖥️ Systems</a>
-            <a href="#">🐳 Containers</a>
+            <a href="#container-monitoring">🐳 Containers</a>
             <a href="#">🌐 Network</a>
             <a href="#">🔔 Alerts</a>
             <a href="#">📄 Logs</a>
@@ -32,7 +32,7 @@
                 <span class="pulse"></span>
                 <strong>Zero Trust Ready</strong>
             </div>
-            <p>Prepared for Entra ID authentication in Task 2</p>
+            <p>Protected with Microsoft Entra ID authentication</p>
         </div>
     </aside>
 
@@ -137,7 +137,7 @@
                             {% else %}
                             <tr>
                                 <td colspan="6" class="empty-state">
-                                    No monitoring data available yet. Start the API and run seed_metrics.py.
+                                    No monitoring data available yet.
                                 </td>
                             </tr>
                             {% endfor %}
@@ -163,25 +163,95 @@
             </aside>
         </section>
 
+        <section class="main-grid" id="container-monitoring">
+            <article class="panel wide">
+                <div class="panel-title">
+                    <h3>Container Monitoring</h3>
+                    <p>Docker container health and performance metrics</p>
+                </div>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Container</th>
+                                <th>CPU</th>
+                                <th>Memory</th>
+                                <th>Disk</th>
+                                <th>Status</th>
+                                <th>Timestamp</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% for container in container_metrics %}
+                            <tr>
+                                <td>{{ container.hostname }}</td>
+                                <td>
+                                    {{ container.cpu_usage }}%
+                                    <div class="mini-bar"><span style="width: {{ container.cpu_usage }}%"></span></div>
+                                </td>
+                                <td>
+                                    {{ container.memory_usage }}%
+                                    <div class="mini-bar"><span style="width: {{ container.memory_usage }}%"></span></div>
+                                </td>
+                                <td>
+                                    {{ container.disk_usage }}%
+                                    <div class="mini-bar"><span style="width: {{ container.disk_usage }}%"></span></div>
+                                </td>
+                                <td>
+                                    <span class="badge {{ container.status | lower }}">
+                                        {{ container.status }}
+                                    </span>
+                                </td>
+                                <td>{{ container.timestamp }}</td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="6" class="empty-state">
+                                    No container metrics available yet.
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </article>
+
+            <aside class="panel">
+                <div class="panel-title">
+                    <h3>Container Summary</h3>
+                    <p>Isolated application environment visibility</p>
+                </div>
+
+                <ul class="evidence-list">
+                    <li>Frontend container monitored</li>
+                    <li>API container monitored</li>
+                    <li>CPU and memory data collected</li>
+                    <li>Metrics sent to the existing API endpoint</li>
+                </ul>
+            </aside>
+        </section>
+
         <section class="bottom-grid">
             <article class="panel">
                 <h3>Cloud Connection</h3>
                 <div class="connection-status">
                     <span class="pulse"></span>
                     <div>
-                        <strong>Azure integration prepared</strong>
-                        <p>Ready for CI/CD and Azure Container Apps in later tasks.</p>
+                        <strong>Azure Container Apps deployed</strong>
+                        <p>Frontend and API are deployed using Docker images and CI/CD.</p>
                     </div>
                 </div>
             </article>
 
             <article class="panel">
-                <h3>Task 1 Evidence</h3>
+                <h3>Task Evidence</h3>
                 <ul class="evidence-list">
-                    <li>Secure web interface design based on Figma mockup</li>
-                    <li>Flask frontend with routes and templates</li>
-                    <li>Frontend reads monitoring data from CS2 API</li>
-                    <li>Structure prepared for Entra ID authentication</li>
+                    <li>Secure web interface based on Figma mockup</li>
+                    <li>Microsoft Entra ID authentication implemented</li>
+                    <li>Dockerized frontend and API containers</li>
+                    <li>Container monitoring added to dashboard</li>
                 </ul>
             </article>
         </section>
