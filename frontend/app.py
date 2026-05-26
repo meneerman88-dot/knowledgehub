@@ -5,11 +5,15 @@ import msal
 import requests
 from dotenv import load_dotenv
 from flask import Flask, render_template, redirect, url_for, session, request
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = os.getenv("SESSION_SECRET", "dev-secret-change-later")
+
+# Nodig voor Azure Container Apps HTTPS reverse proxy
+app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
 
 API_URL = os.getenv("API_URL", "http://localhost:8000/api/v1/metrics")
 API_KEY = os.getenv("API_KEY", "default-dev-key")
@@ -180,7 +184,9 @@ def logout():
     session.clear()
     return redirect(
         "https://login.microsoftonline.com/common/oauth2/v2.0/logout"
-        "?post_logout_redirect_uri=http://localhost:5000/login"
+        "?post_logout_redirect_uri=https://"
+        + request.host
+        + "/login"
     )
 
 
